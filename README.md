@@ -23,10 +23,10 @@ I'm using a postgres database (`DB=interview` `user=postgres`) to store data on 
 I have a handful of pages for the frontend. I'm by no means a frontend expert, so I googled around for a basic library to use and settled on Material Design Lite (MDL). I use MDL for layout/cards/lists and use vanilla JavaScript to dynamically compose some things based on responses from the backend API.
 
 ### Page: `/login.html`
-[Frontend Screenshot](docs/frontend_screenshot.png)
+![Frontend Screenshot](docs/frontend_screenshot.png)
 
 ### Page: `/recipes.html?userId=<Id>`
-[screenshot]
+![Recipes Screenshot](docs/recipes_screenshot.png)
 
 ### Page: `/recipe.html?recipeId`
-[screenshot]
+![Recipe Screenshot](docs/recipe_screenshot.png)
