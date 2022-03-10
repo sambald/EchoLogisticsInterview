@@ -1,50 +1,63 @@
+<!-- Setting doc type, language, encoding, title, favicon -->
 <!DOCTYPE html>
 <html lang="en">
-  <meta charset="UTF-8" />
-  <title>Interview Demo</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <head>
-    <!-- Using Google fonts, Material Design Lite -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="script.js"></script>
-  </head>
-  <body style="height: 100%">
-    <div class="mdl-grid" style="min-height: 100%;">
-      <div class="mdl-cell mdl-cell--3-col"></div>
-      <div class="mdl-cell mdl-cell--6-col">
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-          <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Welcome</h2>
-          </div>
-          <div class="mdl-card__supporting-text">
-            <form action="#" style="padding: 2rem;">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="username">
-                <label class="mdl-textfield__label" for="username">Username</label>
-              </div>
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="password" id="password">
-                <label class="mdl-textfield__label" for="password">Password</label>
-              </div>
-              <div id="badPassword" style="display:none;">
-                <p style="color:red;">
-                  Wrong username or password
-                </p>
-              </div>
-            </form>
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="onLoginClick();">
-              Log in
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-cell--3-col"></div>
-    </div>
-  </body>
-</html>
+<meta charset="UTF-8" />
+<title>Echo Interview Demo</title>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<!-- USED: https://getmdl.io/components/index.html -->
+<!-- Using Google fonts, Material Design Lite, https://getmdl.io/components/index.html -->
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body style="height: 100%">
+  <div class="mdl-grid" style="min-height: 100%;">
+    <!-- Using a 3x6 cell layout to center login form -->
+    <div class="mdl-cell mdl-cell--3-col"></div>
+    <div class="mdl-cell mdl-cell--6-col mdl-card mdl-shadow--2dp mdl-cell--middle">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Welcome</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <form action="#" style="padding: 2rem;">
+          <!-- Username field -->
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="username">
+            <label class="mdl-textfield__label" for="username">Username</label>
+          </div>
+          <!-- Password field -->
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="password" onkeydown="onPasswordEnter(event);">
+            <label class="mdl-textfield__label" for="password">Password</label>
+          </div>
+          <!-- Incorrect login error -->
+          <div id="badPassword" style="display:none; color:red">
+            Wrong username or password
+          </div>
+          <!-- Incorrect registration error -->
+          <div id="badRegistration" style="display:none; color:red">
+            Incomplete username or password
+          </div>
+        </form>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <!-- Login button -->
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="onLoginClick();">
+          Log in
+        </a>
+        <!-- Register -->
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="onRegisterClick();">
+          Register
+        </a>
+      </div>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col"></div>
+  </div>
+</body>
+
+</html>

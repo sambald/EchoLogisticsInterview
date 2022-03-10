@@ -3,24 +3,28 @@ using interview;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-//Gets all recipes
+//Gets all recipes for all users
 app.MapGet("/api/recipes", RecipesController.GetAllRecipes);
 
 //Gets a specific recipe
 app.MapGet("/api/recipes/{rid:guid}", RecipesController.GetRecipeById);
 
-//Get recipes by user
+//Gets all recipes for a specific user
 app.MapGet("/api/users/{uid:guid}/recipes", RecipesController.GetAllRecipesForUser);
 
 //Post to add a new recipe
 app.MapPost("/api/recipes", RecipesController.AddNewRecipe);
 
-// //Delete to delete a recipe
-// //app.MapDelete(...)
+// Delete to delete a recipe
+// app.MapDelete(...)
 
-//Login 
+//Post to register a new user
+app.MapPost("/api/register", UsersController.RegisterUser);
+
+//Post to login an existing user
 app.MapPost("/api/login", UsersController.ValidateLogin);
 
+//Get to reset the database
 app.MapGet("/api/resetDB", () =>
 {
     using (var db = new EFContext())
@@ -30,9 +34,11 @@ app.MapGet("/api/resetDB", () =>
         db.Database.EnsureCreated();
 
         var userID = Guid.NewGuid();
+        var user = new User() { Id = userID, Name = "Sam", Deleted = false, Password = "p@sswrd" };
 
-        db.Users.Add(new User() { Id = userID, Name = "Sam", Deleted = false, Password = "p@sswrd" });
-        db.Recipes.Add(new Recipe() { Id = Guid.NewGuid(), Title = "salty tears", Deleted = false, Description = "cook for ever", Time = TimeSpan.FromSeconds(60), UserID = userID });
+        //Creates a new user and recipe
+        db.Users.Add(user);
+        db.Recipes.Add(new Recipe() { Id = Guid.NewGuid(), Title = "Banana bread", Deleted = false, Description = "Very delicious!", Time = TimeSpan.FromSeconds(600), UserID = userID, User = user });
 
         db.SaveChanges();
 

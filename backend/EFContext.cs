@@ -5,15 +5,19 @@ namespace interview
     public class EFContext : DbContext
     {
         //DbSet<Model> represents the table in the database that holds records of type Model
-        public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; } = default!;
+        public DbSet<Recipe> Recipes { get; set; } = default!;
+        public DbSet<User> Users { get; set; } = default!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //We are going to load our connection string from the environment 
+            //Load connection string from the environment 
             var connectionString = Environment.GetEnvironmentVariable("PG_CONNECTION_STRING");
-            //We are going to tell Entity Framework to use Npgsql (Postgres)
+            //Set Entity Framework to use Npgsql (Postgres)
+            if (connectionString == null)
+            {
+                throw new Exception("No connection string provided");
+            }
             optionsBuilder.UseNpgsql(connectionString);
         }
 

@@ -27,7 +27,7 @@ namespace interview
                                                         .FirstAsync());
                 }
                 //If the unique ID does not have a recipe, return Not Found
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Results.NotFound();
                 }
@@ -40,6 +40,23 @@ namespace interview
             using (var db = new EFContext())
             {
                 var recipe = await context.Request.ReadFromJsonAsync<Recipe>();
+                //If recipe request is empty
+                if (recipe == null)
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return;
+                }
+                //Makes sure user exists
+                try
+                {
+                    recipe.User = await db.Users.FirstAsync(u => u.Id == recipe.UserID);
+                }
+                //If the user does not exist
+                catch (Exception)
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return;
+                }
                 recipe.Id = Guid.NewGuid();
                 db.Recipes.Add(recipe);
                 db.SaveChanges();
@@ -62,7 +79,7 @@ namespace interview
                                                         .ToListAsync());
                 }
                 //If the user does not exist, return Not Found
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Results.NotFound();
                 }

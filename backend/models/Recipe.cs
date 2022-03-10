@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace interview
 {
-    //We're using this Table attribute to tell Entity Framework that we want this class to be backed by a `recipes` table in postgres
+    //Set Entity Framework that we want this class to be backed by a 'recipes' table in postgres
     [Table("recipes")]
     public class Recipe
     {
@@ -34,5 +34,18 @@ namespace interview
 
         [JsonIgnore]
         public User User { get; set; }
+
+        //Default Recipe constructor
+        public Recipe()
+        {
+            this.Id = Guid.Empty;
+            this.Title = string.Empty;
+            this.Description = string.Empty;
+            this.Time = TimeSpan.Zero;
+            this.Deleted = false;
+            this.Ingredients = new List<Ingredient>();
+            this.User = new User();
+            this.UserID = this.User.Id;
+        }
     }
 }
