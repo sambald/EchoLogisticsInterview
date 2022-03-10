@@ -33,5 +33,5 @@ I have a handful of pages for the frontend. I'm by no means a frontend expert, s
 ### Page: `/recipe.html?recipeId`
 ![Recipe Screenshot](docs/recipe_screenshot.png)
 
-### Page: `/createRecipe.html?recipeId`
+### Page: `/createRecipe.html?userId`
 ![Create Recipe Screenshot](docs/createRecipe_screenshot.png)
