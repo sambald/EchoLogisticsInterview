@@ -162,6 +162,7 @@ let saveRecipe = () => {
 
     const ingredientTable = document.getElementById("ingredient-table");
 
+    //Builds JSON entry
     let recipe = {
         title: document.getElementById("recipeTitle").value,
         description: document.getElementById("recipeDescription").value,
@@ -174,7 +175,7 @@ let saveRecipe = () => {
             measure: c.children[2].children[0].children[0].value,
         }))
     };
-    
+
     console.log(recipe);
 
     //Sends username and password inputs to backend
@@ -228,8 +229,8 @@ let addIngredientRow = () => {
     ingredientRow.children[1].children[0].children[1].innerText = "Quantity " + (ingredientTable.childElementCount + 1);
     ingredientRow.children[2].children[0].children[1].innerText = "Measure " + (ingredientTable.childElementCount + 1);
     ingredientTable.appendChild(ingredientRow);
-    
-    //We cloned MDL textfield inputs... had to google around to figure out how to "reset" them
+
+    //Reset cloned MDL textfield inputs
     ingredientRow.children[0].children[0].classList.remove('is-upgraded');
     ingredientRow.children[1].children[0].classList.remove('is-upgraded');
     ingredientRow.children[2].children[0].classList.remove('is-upgraded');

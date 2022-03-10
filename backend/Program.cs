@@ -3,6 +3,31 @@ using interview;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+try
+{
+    using (var db = new EFContext())
+    {
+        //If this is the first time running, create a fresh DB with default data
+        if (!db.Database.CanConnect())
+        {
+            db.Database.EnsureCreated();
+
+            var userID = Guid.NewGuid();
+            var user = new User() { Id = userID, Name = "Sam", Deleted = false, Password = "p@sswrd" };
+
+            //Creates a new user and recipe
+            db.Users.Add(user);
+            db.Recipes.Add(new Recipe() { Id = Guid.NewGuid(), Title = "Banana bread", Deleted = false, Description = "Very delicious!", Time = TimeSpan.FromSeconds(600), UserID = userID, User = user });
+
+            db.SaveChanges();
+        }
+    }
+}
+catch (Exception)
+{
+    //Ignore exceptions here, just for first time setup
+}
+
 //Gets all recipes for all users
 app.MapGet("/api/recipes", RecipesController.GetAllRecipes);
 
