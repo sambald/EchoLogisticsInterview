@@ -1,5 +1,5 @@
 //Logs in an existing user
-let onLoginClick = () => {
+const onLoginClick = () => {
 
     //Clears error message
     document.getElementById("badRegistration").style.display = "none";
@@ -30,7 +30,7 @@ let onLoginClick = () => {
 };
 
 //Registers a new user
-let onRegisterClick = () => {
+const onRegisterClick = () => {
 
     //Clears error message
     document.getElementById("badPassword").style.display = "none";
@@ -69,14 +69,14 @@ let onRegisterClick = () => {
 };
 
 //If user presses enter key after typing in their password, activates log in button
-let onPasswordEnter = (event) => {
+const onPasswordEnter = (event) => {
     if (event.key === 'Enter') {
         onLoginClick();
     }
 };
 
 //Displays all recipes for a user
-let buildRecipes = () => {
+const buildRecipes = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
@@ -117,7 +117,7 @@ let buildRecipes = () => {
 };
 
 //Displays individual recipe and all it's ingredients
-let buildRecipe = () => {
+const buildRecipe = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
@@ -138,10 +138,10 @@ let buildRecipe = () => {
             //Ingredients
             recipe.ingredients.forEach(ingredient => {
 
-                let listItem = document.createElement('li');
+                const listItem = document.createElement('li');
                 listItem.className = 'mdl-list__item';
 
-                let content = document.createElement('span');
+                const content = document.createElement('span');
                 content.className = 'mdl-list__item-primary-content';
 
                 content.textContent = ingredient.name + ": " + ingredient.quantity + " " + ingredient.measure;
@@ -155,7 +155,7 @@ let buildRecipe = () => {
 };
 
 //Lets user save a new recipe
-let saveRecipe = () => {
+const saveRecipe = () => {
 
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
@@ -163,7 +163,7 @@ let saveRecipe = () => {
     const ingredientTable = document.getElementById("ingredient-table");
 
     //Builds JSON entry
-    let recipe = {
+    const recipe = {
         title: document.getElementById("recipeTitle").value,
         description: document.getElementById("recipeDescription").value,
         userId: params.userId,
@@ -211,7 +211,7 @@ let saveRecipe = () => {
 };
 
 //Directs user back to recipes page if canceling creating a new recipe
-let cancelRecipe = () => {
+const cancelRecipe = () => {
 
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
@@ -220,7 +220,7 @@ let cancelRecipe = () => {
 };
 
 //Adds another row to create ingredients table
-let addIngredientRow = () => {
+const addIngredientRow = () => {
     const ingredientTable = document.getElementById("ingredient-table");
     const ingredientRow = document.getElementById("ingredient-row").cloneNode(true);
 
@@ -246,7 +246,7 @@ let addIngredientRow = () => {
 };
 
 //Adds another row to create ingredients table
-let removeIngredientRow = () => {
+const removeIngredientRow = () => {
 
     //Makes sure to not remove the first row
     const ingredientTable = document.getElementById("ingredient-table");
